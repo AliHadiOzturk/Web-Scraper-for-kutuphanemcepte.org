@@ -23,13 +23,15 @@ namespace WebScraping.kutuphanemcepte
             while (true)
             {
                 var data = str.ExtractData("<div class=\"col-xl-3 col-lg-4 col-6\">", "</a>");
+                if (string.IsNullOrEmpty(data.ExtractedString))
+                    break;
                 var result = data.ExtractedString;
                 result = result.RemoveHtmlJunks();
                 str = str.Substring(data.LastIndex);
-                if (!string.IsNullOrEmpty(result))
-                    GetBook(Utils.FindAndExtractHref(result));
-                else
-                    break;
+                // if (!string.IsNullOrEmpty(result))
+                GetBook(Utils.FindAndExtractHref(result));
+                // else
+                //     break;
                 // index = data.LastIndex;
             }
 
